@@ -11,7 +11,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ['https://clean-go-peach.vercel.app'],
+    origin: process.env.CLIENT_URL,
     credentials: true,
   })
 );
