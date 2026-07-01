@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:5001/api';
+const API_BASE = 'https://cleango-production.up.railway.app/api';
 
 function getToken() {
   return localStorage.getItem('cleango_token');
