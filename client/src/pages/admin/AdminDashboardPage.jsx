@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react';
-import { api } from '../../api/client';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { api } from "../../api/client";
 
 export default function AdminDashboardPage() {
+  const navigate = useNavigate();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.adminDashboard()
+    api
+      .adminDashboard()
       .then(setStats)
       .finally(() => setLoading(false));
   }, []);
@@ -32,7 +35,9 @@ export default function AdminDashboardPage() {
 
         <div className="rounded-2xl border border-slate-200 bg-white p-5">
           <p className="text-sm text-slate-500">Delivery Partners</p>
-          <p className="mt-2 text-3xl font-bold">{stats?.deliveryPartners || 0}</p>
+          <p className="mt-2 text-3xl font-bold">
+            {stats?.deliveryPartners || 0}
+          </p>
         </div>
 
         <div className="rounded-2xl border border-slate-200 bg-white p-5">
@@ -42,7 +47,9 @@ export default function AdminDashboardPage() {
 
         <div className="rounded-2xl border border-slate-200 bg-white p-5">
           <p className="text-sm text-slate-500">Total Revenue</p>
-          <p className="mt-2 text-3xl font-bold text-green-600">₹{stats?.revenue?.toFixed(0) || 0}</p>
+          <p className="mt-2 text-3xl font-bold text-green-600">
+            ₹{stats?.revenue?.toFixed(0) || 0}
+          </p>
         </div>
 
         <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
@@ -66,7 +73,7 @@ export default function AdminDashboardPage() {
             {stats?.pendingCleaners > 0 && (
               <button
                 type="button"
-                onClick={() => window.location.href = '/admin/cleaners'}
+                onClick={() => navigate("/admin/cleaners")}
                 className="rounded-lg bg-amber-600 px-4 py-2 text-sm font-medium text-white hover:bg-amber-700"
               >
                 Review Cleaners ({stats.pendingCleaners})
@@ -75,7 +82,7 @@ export default function AdminDashboardPage() {
             {stats?.pendingDelivery > 0 && (
               <button
                 type="button"
-                onClick={() => window.location.href = '/admin/delivery-partners'}
+                onClick={() => navigate("/admin/delivery-partners")}
                 className="rounded-lg bg-amber-600 px-4 py-2 text-sm font-medium text-white hover:bg-amber-700"
               >
                 Review Delivery Partners ({stats.pendingDelivery})
